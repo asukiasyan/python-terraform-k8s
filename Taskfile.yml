@@ -1,0 +1,45 @@
+---
+version: "2"
+
+env:
+  TERRAFORM_BINARY: terraform
+
+
+tasks:
+  clear:
+    silent: true
+    cmds:
+      - echo "Removing terraform cache..."
+      - rm -rf k8s/.terraform
+
+  build:
+    cmds:
+      - echo "Building docker image"
+      - cd source/ && docker build -t asukiasyan/flaskwebapp:latest .
+
+  push:
+    cmds:
+      - echo "Pushing Docker image to hub"
+      - cd source/ && docker login --username=asukiasyan && docker push asukiasyan/flaskwebapp:latest
+
+  init:
+    cmds:
+      - cd k8s/ && terraform init
+
+  plan:
+    cmds:
+      - cd k8s/ && terraform plan
+
+  apply:
+    cmds:
+      - cd k8s/ && terraform apply
+
+
+  destroy:
+    cmds:
+      - cd k8s/ && terraform destroy
+
+  docs:
+    cmds:
+      - cd k8s/ && terraform-docs md .
+
