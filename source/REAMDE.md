@@ -3,5 +3,6 @@
 Run localy:
 
 ```
-pipenv run python main.py
+pip install -r requirements.txt
+python main.py
 ```
