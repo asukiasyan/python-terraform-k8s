@@ -1,0 +1,23 @@
+replicaCount: 1
+
+image:
+  repository: asukiasyan/flaskwebapp
+  tag: latest 
+  pullPolicy: IfNotPresent
+
+ingress: {}
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: NodePort
+  port: 5000
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
